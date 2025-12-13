@@ -29,7 +29,7 @@ setting:
 - log_enabled: Enable logging globally for this app.
 
 ---
-
+## 2. Application Modules
 ```yaml
 app_modules:
   accounts:
@@ -77,7 +77,7 @@ app_modules:
 
 ---
 
-# Cloud ERP Request Flow
+## 3. CRUD Server Flow
 
 
 ![ERP Groups Screenshot](/images/flowchart.png)
@@ -88,6 +88,7 @@ app_modules:
 - This flow shows how a client request is routed through the CRUD server to modules, databases, and logging systems.
 
 ---
+## 4. Database Configuration
 
 ```yaml
 db_config:
@@ -112,3 +113,80 @@ db_config:
       - schema_id: log_schema
         schema_dsl_file: ./config/cloud_erp/log/log_schema.yaml
   ```
+## Explanation:
+
+- cloud_erp: Main application database.
+- log_db: Separate database for logging.
+- type: Database type (MSSQL).
+- conn_str: Connection string.
+- purpose: Role of the database (app_data vs log_data).
+- schema: DSL files defining schema for each module.
+
+## 5. Report and Process Settings
+
+```yaml
+fetch_setting_path: "./config/cloud_erp/reporting"
+report_setting_path: "./config/cloud_erp/reportsys/report_settings.yaml"
+standard_report_settings_id: mini_erp_report_settings
+process_settings_id: mini_erp_process_settings
+process_settings_path: "./config/cloud_erp/process/process_settings.yaml"
+```
+
+## Explanation:
+
+- fetch_setting_path: Folder for report fetching configuration.
+- report_setting_path: Report configuration YAML file.
+- standard_report_settings_id: Default report settings ID.
+- process_settings_id / process_settings_path: Background process configuration
+
+
+## 6. JavaScript Script Settings
+
+```yaml
+js_script_path: "./config/cloud_erp/js_scripts"
+js_script_settings: "./config/cloud_erp/js_scripts/js_script_settings.yaml"
+```
+
+
+## Explanation:
+
+-js_script_path: Folder containing JS scripts for validation and processing.
+-js_script_settings: YAML defining scripts to run.
+
+## 7. Validation Settings
+
+```yaml
+validation_settings_path: "./config/cloud_erp/validations/validation_settings.yaml"
+validation_settings_id: mini_erp_validation_settings
+```
+
+## Explanation:
+
+- validation_settings_path: YAML file containing validation rules.
+- validation_settings_id: Default validation configuration ID.
+
+## 8. Summary
+
+The application configuration serves as the backbone of the ERP system, defining **metadata, modules, databases, logging, reports, processes, scripts, and validations**.
+
+Using this configuration, the **CRUD Server** can:
+
+- **Automatically generate APIs** for each module  
+- **Connect dynamically** to multiple databases  
+- **Execute module-specific processes** seamlessly  
+- **Enforce validations and logging** consistently  
+- **Manage reports and background jobs** efficiently
+
+> **Tip:** This modular approach ensures the ERP is **scalable, maintainable, and easy to extend** as the business grows.
+
+
+## 9. Starting the CRUD Server
+
+After configuration, start the server using:
+```bash
+crudserver.exe
+```
+
+- This initializes the CRUD server.
+- It reads the system.yaml configuration.
+- Once running, the server can handle client requests and route them to the configured modules.
