@@ -65,3 +65,59 @@ app_modules:
       log_table: logdata
       log_database_id: log_db
 ```
+
+
+## Explanation:
+
+- module (accounts, product, sales, payroll, stock, purchase, settings) has its own DSL defining API structure.
+- module_id: Unique identifier for the module.
+- database_id: Database the module uses.
+- doc_dsl: Path to the Document DSL file.
+- log: Module-specific logging configuration.
+
+---
+
+flowchart TD
+    A[Client Request] --> B[CRUD Server]
+    B --> C{Route to Module}
+    C --> D[accounts]
+    C --> E[product]
+    D --> F[cloud_erp Database]
+    E --> F
+    D --> G[log_db Database]
+    E --> G
+    F --> H[Process Result]
+    G --> I[Log Activity]
+    H --> J[Return Response]
+
+---
+
+## Explanation:
+
+- This flow shows how a client request is routed through the CRUD server to modules, databases, and logging systems.
+
+---
+
+```yaml
+db_config:
+  cloud_erp:
+    database_id: cloud_erp
+    type: mssql
+    db_name: CLOUDERP_DEVP_V3
+    conn_str: sqlserver://RPCM:password@10.190.23.7:1433?database=CLOUDERP_LIVE_V2
+    purpose: app_data
+    schema:
+      - schema_id: accounts_schema
+        schema_dsl_file: ./config/cloud_erp/modules/accounts/schema/accounts_schema.yaml
+      - schema_id: product_schema
+        schema_dsl_file: ./config/cloud_erp/modules/product/schema/product_schema.yaml
+  log_db:
+    database_id: log_db
+    type: mssql
+    db_name: CLOUDERP_DEVP_V3
+    conn_str: sqlserver://unais:password@10.190.23.9:1433?database=CLOUDERP_DEVP_V3
+    purpose: log_data
+    schema:
+      - schema_id: log_schema
+        schema_dsl_file: ./config/cloud_erp/log/log_schema.yaml
+  ```
