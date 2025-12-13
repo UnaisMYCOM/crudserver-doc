@@ -92,7 +92,7 @@ app_modules:
       log_table: logdata
       log_database_id: log_db
 
-
+---
       flowchart TD
     A[Client Request] --> B[CRUD Server]
     B --> C{Route to Module}
@@ -125,7 +125,7 @@ app_modules:
     L --> N[Log Activity]
     
     M --> O[Return Response]
-    
+---
 Explanation:
 
 Each module (accounts, product, sales, payroll, stock, purchase, settings) is listed.
@@ -145,7 +145,7 @@ log_table: Table where logs are stored.
 log_database_id: Database used for logging.
 
 Each module has its own DSL to define APIs, making the system modular and scalable.
-
+---
 3. Database Configuration
 yaml
 Copy code
