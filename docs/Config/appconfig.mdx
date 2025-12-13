@@ -1,7 +1,7 @@
 # Cloud ERP App Configuration Breakdown
 
-Here’s a detailed breakdown of your **`system.yaml` / app configuration** for the **Cloud ERP** project.  
-This explains how CRUD Server uses this file to manage modules, databases, logging, scripts, and reports.
+This document explains the **`system.yaml` / app configuration** for the **Cloud ERP** project.  
+It details how CRUD Server uses this file to manage modules, databases, logging, scripts, and reports.
 
 ---
 
@@ -19,7 +19,6 @@ setting:
   log_enabled: true
 
 
----
 Explanation:
 
 app_id / app_code: Unique identifiers for the application.
@@ -28,57 +27,3 @@ app_description: Short description of the app.
 app_author / app_email: Developer or owner information.
 user_auth: Whether user authentication is enabled (false means no login required).
 log_enabled: Enable logging globally for this app.
-
----
-
-```yaml
-app_modules:
-  accounts:
-    module_id: accounts
-    database_id: cloud_erp
-    doc_dsl: ./config/cloud_erp/modules/accounts/documents/accounts_doc_dsl.yaml
-    log:
-      log_enabled: true
-      log_table: logdata
-      log_database_id: log_db
-  product:
-    module_id: product
-    database_id: cloud_erp
-    doc_dsl: ./config/cloud_erp/modules/product/documents/product_doc_dsl.yaml
-    log:
-      log_enabled: true
-      log_table: logdata
-      log_database_id: log_db
-  sales:
-    module_id: sales
-    database_id: cloud_erp
-    doc_dsl: ./config/cloud_erp/modules/sales/documents/sales_doc_dsl.yaml
-    log:
-      log_enabled: true
-      log_table: logdata
-      log_database_id: log_db
-
----
-
-Explanation:
-
-Each module (accounts, product, sales, payroll, stock, purchase, settings) has its own DSL defining API structure.
-module_id: Unique identifier for the module.
-database_id: Database the module uses.
-doc_dsl: Path to the Document DSL file.
-log: Module-specific logging configuration.
-
-
----
-flowchart TD
-    A[Client Request] --> B[CRUD Server]
-    B --> C{Route to Module}
-    C --> D[accounts]
-    C --> E[product]
-    D --> F[cloud_erp Database]
-    E --> F
-    D --> G[log_db Database]
-    E --> G
-    F --> H[Process Result]
-    G --> I[Log Activity]
-    H --> J[Return Response]
