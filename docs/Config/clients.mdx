@@ -1,0 +1,52 @@
+## Clients Configuration
+
+The `clients` section defines all the clients connected to a particular application on the CRUD Server.  
+It includes database connections, enabled status, and the super user for each client.
+
+```yaml
+clients:
+- client_id: client1
+  dbsettings:
+    db_type: mssql
+    conn_str: sqlserver://unais:UU@devp@10.190.23.9:1433?database=CLOUDERP_DEVP_V3
+  enabled: true
+  super_user: admin
+- client_id: "1"
+  dbsettings:
+    db_type: mssql
+    conn_str: sqlserver://RPCM:9i286Fg7g4Zc33fjfryc@10.190.23.7:1433?database=CLOUDERP_LIVE_V2
+  enabled: true
+  super_user: admin
+```
+
+
+## Clients Explanation
+
+### `client_id`
+Unique identifier for the client. Can be numeric or string.
+
+### `dbsettings`
+Contains database connection information specific to that client.
+
+- **`db_type`**: Type of database (e.g., `mssql`).  
+- **`conn_str`**: Connection string used by CRUD Server to connect to the client database.
+
+### `enabled`
+Boolean flag that indicates whether this client is active on the server.
+
+- `true` → Client can access the application.  
+- `false` → Client is inactive and ignored.
+
+### `super_user`
+Username of the client’s super user. This user has full administrative access to the app.
+
+
+![Crud Server Screenshot](/images/clients.png)
+
+
+## Clients Summary
+
+- Each client can have a **unique database connection**.  
+- CRUD Server dynamically reads this configuration to **connect clients to their respective databases**.  
+- `enabled` allows you to **turn a client on or off** without deleting their configuration.  
+- `super_user` defines **who can manage the app** for that client.
