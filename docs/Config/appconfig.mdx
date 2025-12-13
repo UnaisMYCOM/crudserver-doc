@@ -81,15 +81,35 @@ app_modules:
 flowchart TD
     A[Client Request] --> B[CRUD Server]
     B --> C{Route to Module}
+    
     C --> D[accounts]
     C --> E[product]
-    D --> F[cloud_erp Database]
-    E --> F
-    D --> G[log_db Database]
-    E --> G
-    F --> H[Process Result]
-    G --> I[Log Activity]
-    H --> J[Return Response]
+    C --> F[sales]
+    C --> G[payroll]
+    C --> H[stock]
+    C --> I[purchase]
+    C --> J[settings]
+    
+    D --> K[cloud_erp Database]
+    E --> K
+    F --> K
+    G --> K
+    H --> K
+    I --> K
+    J --> K
+    
+    D --> L[log_db Database]
+    E --> L
+    F --> L
+    G --> L
+    H --> L
+    I --> L
+    J --> L
+    
+    K --> M[Process Result]
+    L --> N[Log Activity]
+    
+    M --> O[Return Response]
 ```
 ---
 
