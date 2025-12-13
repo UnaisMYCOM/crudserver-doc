@@ -22,7 +22,7 @@
     "pages": [
       {
         "title": "App config",
-        "href": "/config/appconfig",
+        "href": "/Config/appconfig",
         "icon": "arrow-right"
       }
     ]
