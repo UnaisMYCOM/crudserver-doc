@@ -1,0 +1,44 @@
+# How to Create a POS Machine
+
+This guide explains how to create a **POS Machine** entry in the ERP system. POS machines are linked to each location and are required for validating device information when downloading master data to the POS application.
+
+---
+
+## Step 1: Navigate to the POS Machine Screen
+
+1. Go to **Navigation Settings → Location**.  
+2. Click the **POS Machine** icon.  
+3. You will be redirected to the **POS Machine Management** page.
+
+![ERP Navigation Screenshot](/images/pos_machine.png)
+
+---
+
+## Why POS Machine Setup Is Important
+
+Every location can have one or more POS terminals. Each terminal must be defined in the ERP so the system can correctly recognize and authorize the device.
+
+When configuring a POS machine, you can set:
+
+- **Device ID**
+- **POS Number / Terminal Number**
+- **Assigned Location**
+- **Additional attributes** (e.g., cashier count, device reference)
+
+### What It Does
+
+The POS Machine setup is used to **validate the terminal** when downloading master data to the POS application.  
+If the POS machine details exist in the ERP, the download will proceed normally.  
+If the POS machine is **not defined**, the system will:
+
+❌ Reject the request  
+❌ Show an error indicating the POS terminal is not registered
+
+This ensures:
+
+- Only authorized devices can download data  
+- Security and data integrity are maintained  
+- POS machines are correctly mapped to the right location
+
+---
+

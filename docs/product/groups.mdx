@@ -1,0 +1,81 @@
+# How to Create Product Groups
+
+Product groups in the ERP system allow you to organize products or menu items hierarchically. Groups can have parent-child relationships, track costing, support online ordering visibility, and integrate with POS.
+
+This guide explains how to create groups, their key fields, and how nested groups work.
+
+---
+
+## Step 1: Navigate to Group Management
+
+1. Go to **Product Management** in the ERP.  
+2. Select **Groups** from the header menu.  
+3. Click **Create Group**.
+
+---
+
+![ERP Groups Screenshot](/images/groups.png)
+---
+## Step 2: Fill in Group Details
+
+The **Create Group** form includes the following fields:
+
+| Field | Description |
+|-------|-------------|
+| **Main Group** | Indicates if this is a parent group. Check if it is a top-level group. |
+| **Online** | Controls visibility in online ordering or table ordering. Hide or show items. |
+| **Enabled** | POS-related flag to activate or deactivate the group in POS. |
+| **Child** | Marks the group as a child of another group. Required for nested groups. |
+| **Group Code** | Unique code for the group. Can be manually entered or auto-incremented (default shows `001`). |
+| **Group Description** | Name displayed in POS and reports. |
+| **Group Description 2** | Optional secondary language (e.g., Arabic). |
+| **Division Code** | Auto-populated if a location and division are selected in the header. Important for multi-division setups. |
+| **Parent Group Code** | Select the parent group if creating a nested group. |
+| **Costing Method** | Choose from: `Average`, `FIFO`, `LIFO`, `Last Net`, `Specific`. Currently, only **Last Net** is supported. |
+| **Item Type** | Defines the product type: `MENU` (restaurant), `MATERIAL` (retail), `KIT` (combined items, semi-finished, retail, service bundle). |
+| **Tracking Method** | Choose how inventory is tracked: `Batch`, `Serial`, `Expiry`, `Composite`. |
+| **Posting Method** | Inventory posting type: `Perpetual` or `Periodic`. |
+| **MIS Code** | Optional code for reporting or MIS integration. |
+
+> ⚠️ **Tip:** Ensure that the division code and parent group are correctly selected to avoid misalignment in POS or inventory operations.
+
+---
+
+## Step 3: Understanding Group Hierarchy
+
+The ERP uses a **tree structure** for groups. You can have multiple levels of nested sub-groups.  
+
+### Example:
+- **[001] Main Group**
+  - **[0011] Sub Group** (Parent: 001)
+    - **[0012] Sub Sub Group** (Parent: 0011)
+      - **[0013] Sub Sub Sub Group** (Parent: 0012, Child: Yes)
+
+---
+![ERP Added Screenshot](/images/added_groups.png)
+---
+### Notes
+
+- The **final level** is considered the active sub-group.  
+- The **Child flag** must be checked for all nested sub-groups.  
+- Group codes increment automatically in sequence. Manual assignment is also possible if needed.  
+
+---
+
+### Key Points
+
+- Parent groups organize categories, while child groups define actual items.  
+- Nested sub-groups allow a complex menu or product hierarchy.  
+- Proper group setup is essential for **POS, inventory tracking, and reporting**.
+
+---
+
+## Best Practices
+
+1. Use **clear and descriptive names** for all groups and sub-groups.  
+2. Maintain a **consistent coding structure** for easier tracking (e.g., 001, 0011, 0012).  
+3. For **multi-division businesses**, ensure each division is correctly assigned.  
+4. Use the **Online flag** to control item visibility in online ordering systems.  
+5. Always verify the **Child flag** for sub-groups to avoid missing items in POS or inventory.  
+
+---

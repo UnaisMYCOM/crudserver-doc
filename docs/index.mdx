@@ -1,0 +1,54 @@
+# CRUD Server Documentation
+
+## What is a CRUD Server?
+
+A **CRUD Server** is a server-side application that allows users to create APIs using **YAML configuration files**.  
+This approach is simple, easy to understand, and quick to implement—similar to writing **pseudo code** instead of complex backend logic.
+
+Using YAML, developers can define:
+- Data sources
+- CRUD operations
+- Validations
+- Filters and parameters  
+
+without writing traditional backend code for each API.
+
+---
+
+## Difference Between CRUD Server and Remote Server
+
+| CRUD Server | Remote Server |
+|------------|---------------|
+| APIs are created using **YAML configuration files** | APIs are created by writing **SQL stored procedures** and then exposing them as APIs |
+| **No UI required** | Comes with a **UI** |
+| A **single server** can handle **multiple clients** | Requires **separate sub-servers or remote server profiles** per client database |
+| One server can support **multiple applications** | Requires **separate sub-servers or profiles** for each application |
+| **Easy to debug** | Debugging **takes more time** |
+| **Fast server initialization** | Initialization **slows down** as jobs and profiles increase |
+
+---
+
+## What Is Missing in CRUD Server?
+
+Some advanced features are still under development, such as:
+- **Timer-based profiles**
+- Scheduled or background job execution
+
+These features are planned for future enhancements.
+
+---
+
+## Goal of the CRUD Server
+
+The goal of the CRUD Server is clearly reflected in its name:
+
+- Handle all **standard CRUD operations** directly within the CRUD Server
+- Reduce dependency on complex backend logic
+- Use a **Remote Server** only when **complex APIs or advanced SQL logic** are required
+
+This hybrid approach keeps the system:
+- Clean
+- Scalable
+- Easy to maintain
+
+---

@@ -1,0 +1,113 @@
+# How to Create Products
+
+This guide explains how to create products in the ERP system. Each **Item Type** has different configuration options.  
+In this section, we will first explain the most common and straightforward case: **MENU items**.
+
+---
+
+## Step 1: Navigate to Product Creation
+
+1. Go to **Product Management**.  
+2. Click **Create Product**.
+
+---
+
+## Step 2: Select Group Code
+
+1. Click the **Group Code** field.  
+2. A popup will open showing the available groups.  
+3. Select the appropriate group.
+
+> ℹ️ Based on the selected **Group**, the **Item Type** (Menu, Material, Kit, etc.) and related fields will automatically adjust.
+
+---
+
+## Step 3: Basic Product Details
+
+| Field | Description |
+|------|-------------|
+| **Product Code** | Unique identifier for the item. This code is used across POS and ERP systems. |
+| **Name** | Primary name of the item. |
+| **Other Name** | Secondary language name (e.g., Arabic). |
+| **Display Name** | Name shown on POS buttons. |
+| **Description** | Detailed description of the item (optional). |
+| **Base UOM Code** | Base unit of measure (from UOM Master), e.g., `PCS`, `NOS`. |
+| **Price 1** | Initial selling price of the item. |
+| **Initial Cost** | Starting cost of the item. Used as a reference before GRN updates the cost. |
+| **Costing Method** | Automatically inherited from the selected group. |
+| **Product Reference** | Optional reference field. |
+| **Supplier Code** | Optional. Select from Supplier Master if applicable. |
+
+---
+
+## Step 4: Attribute and Tracking Configuration
+
+### Attribute Type
+Select how the product is managed:
+
+- `Expiry`
+- `Serialized Number`
+- `Color and Size`
+- `Normal`
+- `Production`
+
+### Tracking Type
+Defines how stock is tracked:
+
+- By Units  
+- Batch & Expiry  
+- Color & Size  
+- Serial Number  
+
+---
+
+## Step 5: Inventory Section
+
+Configure inventory-related settings:
+
+| Field | Description |
+|------|-------------|
+| **Stock Type** | Defines how stock is handled. |
+| **Stock Count Type** | Controls stock counting behavior. |
+| **Inventory Control** | Enables or disables inventory tracking. |
+| **Tracking Method** | How stock movement is tracked. |
+| **Discontinue Type** | Defines how discontinued items are handled. |
+
+---
+
+## Step 6: More Details
+
+Additional optional fields for better categorization and reporting:
+
+| Field | Description |
+|------|-------------|
+| **Brand ID** | Brand associated with the product. |
+| **Product Category** | Logical product classification. |
+| **Item Size** | Size information if applicable. |
+| **Color** | Color details if applicable. |
+| **Purchase UOM Code** | Unit used for purchasing. |
+| **Sales UOM Code** | Unit used for selling. |
+| **Item Attributes** | Custom attributes if required. |
+
+---
+
+## Step 7: Linked Production (Restaurant Use Case)
+
+Linked Production allows multiple item variations to be connected to one main product.
+
+### Example:
+
+- **PIZZA** (Main Item)
+  - Small Pizza
+  - Medium Pizza
+  - Large Pizza
+
+### How It Works:
+- In POS, only **one button (PIZZA)** is displayed.  
+- When clicked, the customer or cashier selects the size (Small, Medium, Large).  
+- Each size is linked internally for pricing, inventory, and reporting.
+
+> ⚠️ **Tip:** Linked production is ideal for restaurant menus where size, flavor, or portion selection is required without cluttering the POS screen.
+
+---
+

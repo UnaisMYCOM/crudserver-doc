@@ -1,0 +1,60 @@
+{
+  "name": "CRUD SERVER MANUAL",
+  "description": "How to Use",
+  "sidebar": [
+  {
+    "group": "Getting Started",
+    "pages": [
+      {
+        "title": "Welcome to Crud Server ",
+        "href": "/",
+        "icon": "rocket"
+      }
+    ]
+  },
+    {
+    "group": "Location Setup",
+    "pages": [
+      {
+        "title": "Location Setup",
+        "href": "location_setup/location",
+        "icon": "arrow-right"
+      },
+      {
+        "title": "Divison Setup",
+        "href": "location_setup/division",
+        "icon": "arrow-right"
+      },
+      {
+        "title": "Sub location Setup",
+        "href": "location_setup/sub_location",
+        "icon": "arrow-right"
+      },
+      {
+        "title": "POS Machine Setup",
+        "href": "location_setup/pos_machine",
+        "icon": "arrow-right"
+      },
+      {
+        "title": "Time Setup",
+        "href": "location_setup/time",
+        "icon": "arrow-right"
+      }
+    ]
+  } ,{
+    "group": "Product Managment",
+    "pages": [
+      {
+        "title": "Groups",
+        "href": "/product/groups",
+        "icon": "arrow-right"
+      },
+      {
+        "title": "Products",
+        "href": "/product/product",
+        "icon": "arrow-right"
+      }
+    ]
+  }
+]
+}
