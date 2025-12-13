@@ -1,68 +1,124 @@
-# User Manual – Initial Setup Flow
+```md
+# How to Get Started with CRUD Server
 
-> This section guides you through the steps to set up the ERP system after creating a client and assigning module access.
-
----
-
-## Step 1: Create a Location
-
-1. Navigate to the **Locations** module.  
-2. Click **Add New Location**.  
-3. Enter the **location name** and other required details.  
-4. Save the location.  
-
-> Each location represents a physical or operational unit in your organization.
+The **CRUD Server** follows a structured folder hierarchy to make development, debugging, and maintenance easier.  
+Here’s a detailed explanation using an example project **CLOUD ERP v2**, which relies entirely on CRUD Server.
 
 ---
 
-## Step 2: Add Division Code(s) under the Location
+## Step 1: Folder Structure Overview
 
-1. Select the location you just created.  
-2. Click **Add Division Code**.  
-3. Enter a unique **division code**.  
-4. Provide a **division name/description**.  
-5. Save the division code.  
+The folder structure is designed to keep projects, modules, and clients organized.  
+Each project resides under the `config/` folder of the CRUD Server.
 
-> Each location can have **multiple division codes**, allowing different menus or masters to be assigned for POS or ERP operations.
+### Example:
 
----
-
-## Step 3: Add Sub-Location Code(s)
-
-1. Under each division code, click **Add Sub-Location**.  
-2. Enter a unique **sub-location code**.  
-3. Provide a **description**.  
-4. Save the sub-location.  
-
-> Sub-locations help organize operations within a division, such as departments, sections, or branches.
-
----
-
-## Step 4: Create Price Group(s)
-
-1. Navigate to the **Price Groups** module.  
-2. Click **Add New Price Group**.  
-3. Enter a **price group name** and assign pricing details.  
-4. Save the price group.  
-
-> Price groups define pricing structures that can be applied to divisions or menus.
-
----
-
-## Step 5: Attach Price Group to Division Code
-
-1. Select the division code you want to assign pricing for.  
-2. Click **Assign Price Group**.  
-3. Select the **default price group**.  
-4. Save the assignment.  
-
-> - Each division code **can have multiple price groups**, but a **default price group must always be assigned**.  
-> - This ensures that POS or ERP transactions have a base pricing reference.  
+- **Crud Server/**
+  - **config/**
+    - **CLOUD ERP v2/**
+      - **app/**
+        - **app_config/** – Define all paths and main database connection
+        - **clients/**
+          - **clients.yaml** – Contains client IDs and database connection details
+        - **js_scripts/** – JavaScript validations for processing
+        - **log/** – Logging schemas for errors or actions
+        - **modules/**
+          - **accounts/** – Module structure like ERP apps (accounts, products, stock)
+            - **documents/**
+            - **schema/**
+          - **product_management/**
+            - **documents/**
+            - **schema/**
+        - **process/** – Background processes or tasks
+        - **report_sys/** – Reports and analytics configurations
+        - **app_config/**
+        - **system.yaml** – Core system configuration
+        - **server.crt** – Server SSL certificate
+        - **server.key** – Server SSL key
+        - **crudserver.exe** – Console application used to initialize and run the server
+    - **Smart Inv 1.8/** – Another project following the same structure
 
 ---
 
-### Key Notes
+## Step 2: Explanation of Key Folders and Files
 
-- **One location → multiple division codes → multiple price groups**  
-- The default price group is mandatory for every division code.  
-- Proper setup ensures POS downloads and module access work correctly.
+- **app_config/**  
+  Contains global configurations for the project, including paths and database connection settings.
+
+- **clients/clients.yaml**  
+  Defines all clients, their IDs, and database connection information.  
+  CRUD Server uses this to connect to different client databases dynamically.
+
+- **js_scripts/**  
+  Holds JavaScript validation scripts used in CRUD operations. These scripts can handle data validation, transformation, or other processing tasks.
+
+- **log/**  
+  Contains logging schemas. All errors, system actions, or operations performed by CRUD Server are logged here.
+
+- **modules/**  
+  Organizes the application modules similar to ERP structure (e.g., accounts, products, stock).  
+  Each module typically has:
+  - **documents/** – Defines document structures and business logic  
+  - **schema/** – Defines the database schema related to that module  
+
+- **process/**  
+  Holds scripts for background jobs or processes.
+
+- **report_sys/**  
+  Contains configuration for reports and analytics within the project.
+
+- **server.crt & server.key**  
+  SSL certificate and key for secure server communication.
+
+- **system.yaml**  
+  Core system configuration that defines global settings and behaviors of CRUD Server.
+
+- **crudserver.exe**  
+  Console application used to initialize and run the server. This is the main executable that starts the CRUD Server for the selected project and clients.
+
+---
+
+## Step 3: Understanding Project Hierarchy
+
+Projects can have **nested modules and submodules**, similar to a tree structure.  
+This makes it easy to organize complex applications like ERP systems.
+
+### Example:
+
+- **CLOUD ERP v2** (Project)
+  - **app** (Main application folder)
+    - **modules**
+      - **accounts** (Module)
+        - **documents/**
+        - **schema/**
+      - **product_management** (Module)
+        - **documents/**
+        - **schema/**
+    - **clients**
+      - **clients.yaml**
+    - **js_scripts/**
+    - **log/**
+    - **process/**
+    - **report_sys/**
+    - **app_config/**
+    - **system.yaml**
+    - **server.crt**
+    - **server.key**
+    - **crudserver.exe**
+
+> Similarly, you can have multiple projects under the `config/` folder, each with its own modules, clients, and configurations.
+
+---
+
+## Step 4: Getting Started Steps
+
+1. **Choose a project folder** (e.g., `CLOUD ERP v2`)  
+2. **Review `app_config/`** to ensure database and path configurations are correct.  
+3. **Check `clients/clients.yaml`** to confirm client database connections.  
+4. **Explore `modules/`** to understand the structure of documents and schemas.  
+5. **Use `js_scripts/`** for any custom validation or processing requirements.  
+6. **Run `crudserver.exe`** to initialize and start the server.  
+7. **Monitor logs** in the `log/` folder for any errors or actions.  
+
+> The folder structure is designed for **scalability**—you can add new projects, modules, or clients without disrupting existing setups.
+```
