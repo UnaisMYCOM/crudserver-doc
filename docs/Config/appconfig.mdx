@@ -77,11 +77,13 @@ app_modules:
 
 ---
 
-```mermaid
+import { Mermaid } from '@mermaid-js/react';
+
+<Mermaid chart={`
 flowchart TD
     A[Client Request] --> B[CRUD Server]
     B --> C{Route to Module}
-    
+
     C --> D[accounts]
     C --> E[product]
     C --> F[sales]
@@ -89,7 +91,7 @@ flowchart TD
     C --> H[stock]
     C --> I[purchase]
     C --> J[settings]
-    
+
     D --> K[cloud_erp Database]
     E --> K
     F --> K
@@ -97,7 +99,7 @@ flowchart TD
     H --> K
     I --> K
     J --> K
-    
+
     D --> L[log_db Database]
     E --> L
     F --> L
@@ -105,12 +107,13 @@ flowchart TD
     H --> L
     I --> L
     J --> L
-    
+
     K --> M[Process Result]
     L --> N[Log Activity]
-    
+
     M --> O[Return Response]
-```
+`} />
+
 ---
 
 ## Explanation:
