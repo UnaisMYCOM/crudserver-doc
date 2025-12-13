@@ -1,7 +1,7 @@
 # Cloud ERP App Configuration Breakdown
 
 Here’s a detailed breakdown of your **`system.yaml` / app configuration** for the **Cloud ERP** project.  
-This helps understand how CRUD Server uses this file to manage modules, databases, logging, scripts, and reports.
+This explains how CRUD Server uses this file to manage modules, databases, logging, scripts, and reports.
 
 ---
 
@@ -17,23 +17,21 @@ setting:
   app_email: john.doe@example.com
   user_auth: false
   log_enabled: true
+
+
+---
 Explanation:
 
 app_id / app_code: Unique identifiers for the application.
-
 app_version: Version of the ERP.
-
 app_description: Short description of the app.
-
 app_author / app_email: Developer or owner information.
-
 user_auth: Whether user authentication is enabled (false means no login required).
-
 log_enabled: Enable logging globally for this app.
 
-2. Application Modules
-yaml
-Copy code
+---
+
+```yaml
 app_modules:
   accounts:
     module_id: accounts
@@ -59,196 +57,28 @@ app_modules:
       log_enabled: true
       log_table: logdata
       log_database_id: log_db
-  payroll:
-    module_id: payroll
-    database_id: cloud_erp
-    doc_dsl: ./config/cloud_erp/modules/payroll/documents/payroll_doc_dsl.yaml
-    log:
-      log_enabled: true
-      log_table: logdata
-      log_database_id: log_db
-  stock:
-    module_id: stock
-    database_id: cloud_erp
-    doc_dsl: ./config/cloud_erp/modules/stock/documents/stock_doc_dsl.yaml
-    log:
-      log_enabled: true
-      log_table: logdata
-      log_database_id: log_db
-  purchase:
-    module_id: purchase
-    database_id: cloud_erp
-    doc_dsl: ./config/cloud_erp/modules/purchase/documents/purchase_doc_dsl.yaml
-    log:
-      log_enabled: true
-      log_table: logdata
-      log_database_id: log_db
-  settings:
-    module_id: settings
-    database_id: cloud_erp
-    doc_dsl: ./config/cloud_erp/modules/settings/documents/settings_doc_dsl.yaml
-    log:
-      log_enabled: true
-      log_table: logdata
-      log_database_id: log_db
 
 ---
-      flowchart TD
-    A[Client Request] --> B[CRUD Server]
-    B --> C{Route to Module}
-    
-    C --> D[accounts]
-    C --> E[product]
-    C --> F[sales]
-    C --> G[payroll]
-    C --> H[stock]
-    C --> I[purchase]
-    C --> J[settings]
-    
-    D --> K[cloud_erp Database]
-    E --> K
-    F --> K
-    G --> K
-    H --> K
-    I --> K
-    J --> K
-    
-    D --> L[log_db Database]
-    E --> L
-    F --> L
-    G --> L
-    H --> L
-    I --> L
-    J --> L
-    
-    K --> M[Process Result]
-    L --> N[Log Activity]
-    
-    M --> O[Return Response]
----
+
 Explanation:
 
-Each module (accounts, product, sales, payroll, stock, purchase, settings) is listed.
-
+Each module (accounts, product, sales, payroll, stock, purchase, settings) has its own DSL defining API structure.
 module_id: Unique identifier for the module.
-
-database_id: Database this module uses.
-
-doc_dsl: Path to the Document DSL file defining API structure and business logic.
-
+database_id: Database the module uses.
+doc_dsl: Path to the Document DSL file.
 log: Module-specific logging configuration.
 
-log_enabled: Enable/disable logging.
 
-log_table: Table where logs are stored.
-
-log_database_id: Database used for logging.
-
-Each module has its own DSL to define APIs, making the system modular and scalable.
 ---
-3. Database Configuration
-yaml
-Copy code
-db_config:
-  cloud_erp:
-    database_id: cloud_erp
-    type: mssql
-    db_name: CLOUDERP_DEVP_V3
-    conn_str: sqlserver://RPCM:9i286Fg7g4Zc33fjfryc@10.190.23.7:1433?database=CLOUDERP_LIVE_V2
-    purpose: app_data
-    schema:
-    - schema_id: accounts_schema
-      schema_dsl_file: ./config/cloud_erp/modules/accounts/schema/accounts_schema.yaml
-    - schema_id: product_schema
-      schema_dsl_file: ./config/cloud_erp/modules/product/schema/product_schema.yaml
-    - schema_id: sales_schema
-      schema_dsl_file: ./config/cloud_erp/modules/sales/schema/sales_schema.yaml
-    - schema_id: payroll_schema
-      schema_dsl_file: ./config/cloud_erp/modules/payroll/schema/payroll_schema.yaml
-    - schema_id: stock_schema
-      schema_dsl_file: ./config/cloud_erp/modules/stock/schema/stock_schema.yaml
-    - schema_id: settings_schema
-      schema_dsl_file: ./config/cloud_erp/modules/settings/schema/settings_schema.yaml
-    - schema_id: purchase_schema
-      schema_dsl_file: ./config/cloud_erp/modules/purchase/schema/purchase_schema.yaml
-  log_db:
-    database_id: log_db
-    type: mssql
-    db_name: CLOUDERP_DEVP_V3
-    conn_str: sqlserver://unais:UU@devp@10.190.23.9:1433?database=CLOUDERP_DEVP_V3
-    purpose: log_data
-    schema:
-    - schema_id: log_schema
-      schema_dsl_file: ./config/cloud_erp/log/log_schema.yaml
-Explanation:
-
-cloud_erp: Main application database.
-
-log_db: Separate database for logging.
-
-type: Database type (MSSQL).
-
-db_name: Actual database name.
-
-conn_str: Connection string.
-
-purpose: Role of the database (app_data vs log_data).
-
-schema: DSL files defining schema for each module.
-
-4. Report and Process Settings
-yaml
-Copy code
-fetch_setting_path: "./config/cloud_erp/reporting"
-report_setting_path: "./config/cloud_erp/reportsys/report_settings.yaml"
-standard_report_settings_id: mini_erp_report_settings
-process_settings_id: mini_erp_process_settings
-process_settings_path: "./config/cloud_erp/process/process_settings.yaml"
-Explanation:
-
-fetch_setting_path: Folder for report fetching configuration.
-
-report_setting_path: Report configuration YAML.
-
-standard_report_settings_id: Default report setting ID.
-
-process_settings_id / process_settings_path: Background process configuration.
-
-5. JavaScript Script Settings
-yaml
-Copy code
-js_script_path: "./config/cloud_erp/js_scripts"
-js_script_settings: "./config/cloud_erp/js_scripts/js_script_settings.yaml"
-Explanation:
-
-js_script_path: Folder containing JS scripts for validation and processing.
-
-js_script_settings: YAML defining scripts to run.
-
-6. Validation Settings
-yaml
-Copy code
-validation_settings_path: "./config/cloud_erp/validations/validation_settings.yaml"
-validation_settings_id: mini_erp_validation_settings
-Explanation:
-
-validation_settings_path: YAML file containing validation rules.
-
-validation_settings_id: Default validation configuration ID.
-
-Summary
-The app config defines metadata, modules, databases, logging, reports, processes, scripts, and validations.
-
-CRUD Server reads this configuration to:
-
-Generate APIs automatically
-
-Connect to databases dynamically
-
-Run module-specific processes
-
-Apply validations and logging consistently
-
-Manage reports and background jobs efficiently
-
-This modular configuration makes the ERP scalable, maintainable, and easy to extend.
+flowchart TD
+    A[Client Request] --> B[CRUD Server]
+    B --> C{Route to Module}
+    C --> D[accounts]
+    C --> E[product]
+    D --> F[cloud_erp Database]
+    E --> F
+    D --> G[log_db Database]
+    E --> G
+    F --> H[Process Result]
+    G --> I[Log Activity]
+    H --> J[Return Response]
