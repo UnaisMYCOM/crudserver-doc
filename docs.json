@@ -24,6 +24,11 @@
         "title": "App config",
         "href": "/Config/appconfig",
         "icon": "arrow-right"
+      },
+       {
+        "title": "App Settings",
+        "href": "/Config/appsettings",
+        "icon": "arrow-right"
       }
     ]
   } 
