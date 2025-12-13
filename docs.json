@@ -20,6 +20,12 @@
     {
     "group": "Config",
     "pages": [
+      
+       {
+        "title": "System",
+        "href": "/Config/system",
+        "icon": "arrow-right"
+      },
       {
         "title": "App config",
         "href": "/Config/appconfig",

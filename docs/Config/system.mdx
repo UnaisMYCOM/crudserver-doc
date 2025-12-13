@@ -1,0 +1,68 @@
+## System Configuration
+
+This is the **main configuration file** used by the CRUD Server to start up the system.  
+It defines the system metadata, port, application, and API URLs.
+
+```yaml
+system:
+  name: mysystem
+  version: 1.0
+  description: My system description
+  port: 8805
+  crudbaseurl: /crudapi/cloudERP
+  appbaseurl: /appapi
+  app_id: cloud_erp_accounts
+  appcode: cloud_erp_accounts
+  appconfigpath: ./config/cloud_erp/app
+  appconfigfile: app_config.yaml
+  usessl: N
+```
+
+## System Configuration Explanation
+
+### `name`
+Name of the system.
+
+### `version`
+Version of the system.
+
+### `description`
+Short description of the system.
+
+### `port`
+TCP port where the CRUD Server will listen for requests.
+
+### `crudbaseurl`
+Base URL path for **CRUD APIs**.
+
+- Example: `http://localhost:8805/crudapi/cloudERP/...`  
+- All automatically generated module APIs will be under this path.
+
+### `appbaseurl`
+Base URL path for **application APIs**.
+
+- Example: `http://localhost:8805/appapi/...`  
+- Used for custom app-specific endpoints.
+
+### `app_id` / `appcode`
+Identifiers for the application that the server will load.
+
+### `appconfigpath`
+Path to the folder containing the app configuration files.
+
+### `appconfigfile`
+Main app configuration file (e.g., `app_config.yaml`).
+
+### `usessl`
+Indicates whether SSL is used (`Y` for yes, `N` for no).
+
+---
+
+![Crud Server Screenshot](/images/system.png)
+---
+## How API URLs are determined
+
+- The **server port** (`port`) + **base URLs** (`crudbaseurl` / `appbaseurl`) define the root paths for APIs.  
+- CRUD Server reads `app_id` and `appconfigfile` to know which application configuration to load.  
+- All **module APIs** (accounts, sales, product, etc.) are automatically exposed under `crudbaseurl`.  
+- Custom **application endpoints** are exposed under `appbaseurl`.
