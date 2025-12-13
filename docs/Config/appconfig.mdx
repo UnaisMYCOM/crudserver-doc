@@ -27,3 +27,39 @@ setting:
 - app_author / app_email: Developer or owner information.
 - user_auth: Whether user authentication is enabled (false means no login required).
 - log_enabled: Enable logging globally for this app.
+
+'''yaml
+app_modules:
+  accounts:
+    module_id: accounts
+    database_id: cloud_erp
+    doc_dsl: ./config/cloud_erp/modules/accounts/documents/accounts_doc_dsl.yaml
+    log:
+      log_enabled: true
+      log_table: logdata
+      log_database_id: log_db
+  product:
+    module_id: product
+    database_id: cloud_erp
+    doc_dsl: ./config/cloud_erp/modules/product/documents/product_doc_dsl.yaml
+    log:
+      log_enabled: true
+      log_table: logdata
+      log_database_id: log_db
+  sales:
+    module_id: sales
+    database_id: cloud_erp
+    doc_dsl: ./config/cloud_erp/modules/sales/documents/sales_doc_dsl.yaml
+    log:
+      log_enabled: true
+      log_table: logdata
+      log_database_id: log_db
+  payroll:
+    module_id: payroll
+    database_id: cloud_erp
+    doc_dsl: ./config/cloud_erp/modules/payroll/documents/payroll_doc_dsl.yaml
+    log:
+      log_enabled: true
+      log_table: logdata
+      log_database_id: log_db
+    '''
