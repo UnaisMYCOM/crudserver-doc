@@ -18,27 +18,12 @@
     ]
   },
     {
-    "group": "Config",
+    "group": "App Config",
     "pages": [
       
        {
         "title": "System",
-        "href": "/Config/system",
-        "icon": "arrow-right"
-      },
-      {
-        "title": "App config",
-        "href": "/Config/appconfig",
-        "icon": "arrow-right"
-      },
-       {
-        "title": "App Settings",
-        "href": "/Config/appsettings",
-        "icon": "arrow-right"
-      },
-       {
-        "title": "clients",
-        "href": "/Config/clients",
+        "href": "/Main Project/App Config",
         "icon": "arrow-right"
       }
     ]

@@ -1,0 +1,66 @@
+## Applications Configuration
+
+The `apps` section in CRUD Server defines the applications that are available on the server, along with their configuration files, default settings, and enabled status.
+
+```yaml
+apps:
+  cloud_erp:
+    app_settings: ./config/cloud_erp/app/app_config.yaml
+    client_settings: ./config/cloud_erp/clients/clients.yaml
+    default_app: true
+    enabled: true
+  backoffice:
+    app_settings: ./config/smartinv_v1_8/app/app_config.yaml
+    client_settings: ./config/smartinv_v1_8/clients/client_config.yaml
+    default_app: false
+    enabled: false
+```
+
+### Key Configuration Fields
+
+#### `app_settings`
+Path to the main application configuration YAML (e.g., `system.yaml` or `app_config.yaml`).  
+This file defines:
+
+- Modules  
+- Databases  
+- Logging  
+- Scripts  
+- Validations  
+
+#### `client_settings`
+Path to the client configuration YAML.  
+This file contains:
+
+- All client IDs  
+- Database connections  
+- Client-specific settings  
+
+> **Note:** Each application can have multiple clients.
+
+#### `default_app`
+Boolean flag indicating if this is the **default app** to load when a client connects:
+
+- `true` → This app loads automatically if no specific app is selected.  
+- `false` → This app will not be loaded by default.
+
+#### `enabled`
+Boolean flag controlling whether the app is **active on the server**:
+
+- `true` → App is available and can handle requests.  
+- `false` → App is inactive and ignored by CRUD Server.
+
+### Example Usage
+
+When the CRUD Server starts, it reads the **apps section** to determine:
+
+- Which apps are available  
+- Which app should be loaded by default  
+
+- **`cloud_erp`** is both **default** and **enabled**, so it will be the primary application served.  
+- **`backoffice`** is configured but **disabled**, so the server will ignore it until `enabled` is set to `true`.
+
+
+![Crud Server Screenshot](/images/appsettings.png)
+
+--**This configuration allows CRUD Server to host multiple apps on the same server while controlling which apps are active and which is the default for clients.
