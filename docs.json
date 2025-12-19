@@ -2,31 +2,49 @@
   "name": "CRUD SERVER MANUAL",
   "description": "How to Use",
   "sidebar": [
-  {
-    "group": "Getting Started",
-    "pages": [
-      {
-        "title": "Welcome to Crud Server ",
-        "href": "/",
-        "icon": "rocket"
-      },
-      {
-        "title": "Next setps ",
-        "href": "/next-steps",
-        "icon": "rocket"
-      }
-    ]
-  },
     {
-    "group": "Main Project",
-    "pages": [
-      
-       {
-        "title": "System",
-        "href": "/Main_Project/App_Config/appconfig",
-        "icon": "arrow-right"
-      }
-    ]
-  } 
-]
+      "group": "Getting Started",
+      "pages": [
+        {
+          "title": "Welcome to Crud Server",
+          "href": "/",
+          "icon": "rocket"
+        },
+        {
+          "title": "Next Steps",
+          "href": "/next-steps",
+          "icon": "rocket"
+        }
+      ]
+    },
+    {
+      "group": "Main Project",
+      "pages": [
+        {
+          "title": "System",
+          "href": "/Main_Project/App_Config/appconfig",
+          "icon": "arrow-right"
+        },
+        {
+          "title": "Clients",
+          "href": "/Main_Project/Clients/clients",
+          "icon": "arrow-right"
+        },
+        {
+          "title": "Modules",
+          "icon": "arrow-right",
+          "pages": [
+            {
+              "title": "Documents",
+              "href": "/Main_Project/Modules/documents"
+            },
+            {
+              "title": "Schema",
+              "href": "/Main_Project/Modules/schema"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

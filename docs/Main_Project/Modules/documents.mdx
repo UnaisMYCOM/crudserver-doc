@@ -1,66 +1,82 @@
-## Applications Configuration
+# Document Configuration
 
-The `apps` section in CRUD Server defines the applications that are available on the server, along with their configuration files, default settings, and enabled status.
+This document defines the configuration and routing for all CRUD modules in the system.  
+There is **one main document file** which registers all the documents and their respective schema references.  
+This file is also referenced in `app_config` and is responsible for redirecting to the correct document definitions.
+
+---
+
+## Main Document File Example
 
 ```yaml
-apps:
-  cloud_erp:
-    app_settings: ./config/cloud_erp/app/app_config.yaml
-    client_settings: ./config/cloud_erp/clients/clients.yaml
-    default_app: true
-    enabled: true
-  backoffice:
-    app_settings: ./config/smartinv_v1_8/app/app_config.yaml
-    client_settings: ./config/smartinv_v1_8/clients/client_config.yaml
-    default_app: false
-    enabled: false
+- schema_id: product_more_info_schema
+  schema_dsl_file: ./config/cloud_erp/modules/product/schema/product_more_info_schema.yaml
+- schema_id: barcode_master_schema
+  schema_dsl_file: ./config/cloud_erp/modules/product/schema/barcode_master_schema.yaml
+- schema_id: mast_group_schema
+  schema_dsl_file: ./config/cloud_erp/modules/product/schema/mast_group_schema.yaml
+- schema_id: mast_sub_group_schema
 ```
 
-### Key Configuration Fields
+## Document Details
 
-#### `app_settings`
-Path to the main application configuration YAML (e.g., `system.yaml` or `app_config.yaml`).  
-This file defines:
+Each `schema_id` maps to a schema YAML file which contains the detailed structure and validation rules for that module.
 
-- Modules  
-- Databases  
-- Logging  
-- Scripts  
-- Validations  
+Taking `product_more_info_schema` as an example, each document has the following properties:
 
-#### `client_settings`
-Path to the client configuration YAML.  
-This file contains:
-
-- All client IDs  
-- Database connections  
-- Client-specific settings  
-
-> **Note:** Each application can have multiple clients.
-
-#### `default_app`
-Boolean flag indicating if this is the **default app** to load when a client connects:
-
-- `true` → This app loads automatically if no specific app is selected.  
-- `false` → This app will not be loaded by default.
-
-#### `enabled`
-Boolean flag controlling whether the app is **active on the server**:
-
-- `true` → App is available and can handle requests.  
-- `false` → App is inactive and ignored by CRUD Server.
-
-### Example Usage
-
-When the CRUD Server starts, it reads the **apps section** to determine:
-
-- Which apps are available  
-- Which app should be loaded by default  
-
-- **`cloud_erp`** is both **default** and **enabled**, so it will be the primary application served.  
-- **`backoffice`** is configured but **disabled**, so the server will ignore it until `enabled` is set to `true`.
+| Property        | Description |
+|-----------------|-------------|
+| `doc_id`        | Unique identifier for the document. |
+| `module_id`     | The module this document belongs to. |
+| `submodule_id`  | Submodule name. Can be the same as `doc_id`. |
+| `doc_type`      | Type of document. Usually `crud`. |
+| `update_type`   | Type of operation: <br> - `master` <br> - `master-detail` (header + tran) <br> - `multi-master` (bulk insert with multiple headers and trans) |
+| `schema_id`     | Reference to the schema defined in the schema YAML. |
+| `data_tables`   | Actual database tables used for this document. |
+| `routes`        | API function name (base URL comes from system config). |
+| `methods`       | HTTP methods allowed: `GET`, `POST`, `PUT`, `DELETE`. |
+| `operations`    | CRUD operations: <br> - `read` <br> - `create` <br> - `update` <br> - `delete` <br> - `list` |
 
 
-![Crud Server Screenshot](/images/appsettings.png)
+```yaml
 
---**This configuration allows CRUD Server to host multiple apps on the same server while controlling which apps are active and which is the default for clients.
+doc_id: product_more_info
+module_id: product
+submodule_id: product_more_info
+doc_type: crud
+update_type: master
+schema_id: product_more_info_schema
+data_tables:
+  - table_id: product_more_info
+routes:
+  - path: /product_more_info
+    methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+    operations:
+      - read
+      - create
+      - update
+      - delete
+      - list
+
+```
+
+## Explanation
+
+- The `routes.path` is appended to the base URL defined in system configuration.  
+  **Example:**  
+http://localhost:8805/crudapi/cloudERP/product_more_info
+
+
+```javascript
+
+- `methods` define which HTTP methods are allowed on this route.  
+Examples: `GET`, `POST`, `PUT`, `DELETE`
+
+- `operations` define the logical actions available on this document.  
+Examples: `read`, `create`, `update`, `delete`, `list`
+
+```
